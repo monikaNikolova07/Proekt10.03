@@ -4,14 +4,54 @@ using System.Numerics;
 
 namespace Proekt2._0
 {
+   
     public class Program
-    {
+    { 
         public static List <Theaters> theatersL = new List<Theaters>();
         public static List<Actors> actorsL = new List<Actors>();
         public static List<Playes> playesL = new List<Playes>();
         static void Main(string[] args)
         {
-            
+            Console.InputEncoding = System.Text.Encoding.UTF8;
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+            while (true)
+            {
+                Menu();
+                Console.WriteLine("Изберете опция:");
+                string choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "1":
+                        AddTheater();
+                        break;
+                    case "2":
+                        AddActor();
+                        break;
+                    case "3":
+                        AddPlay();
+                        break;
+                    case "4":
+                        AddProprietary();
+                        break;
+                    case "5":
+                        PrintActors();
+                        break;
+                    case "6":
+                        PrintTheaters();
+                        break;
+                    case "7":
+                        PrintPlays();
+                        break;
+                    case "8":
+                        UpdatePlayTitle();
+                        break;
+                    default:
+                        Console.WriteLine("Невалиден избор, опитайте отново.");
+                        break;
+                }
+            }
         }
 
         public static void Menu()
@@ -21,21 +61,13 @@ namespace Proekt2._0
             Console.WriteLine("2.Add Actor");
             Console.WriteLine("3.Add Play");
             Console.WriteLine("4.Add Proprietary");
-
-            Console.WriteLine("5.Add Actor to Theater");
-            Console.WriteLine("6.Add Actor to Play");
-
-            Console.WriteLine("7 Принтирай всички актьори");
-            Console.WriteLine("8 Принтитай всички театри:");
-            Console.WriteLine("9 Принтирай всички Представления:");
-            Console.WriteLine("10 Принтирай кой актьор в кой театър е:");
-            Console.WriteLine("11 Провери дали съществува такъв театър:");
-            Console.WriteLine("12 Провери дали съществува такъв актьор:");
-            Console.WriteLine("13 Актуализирай името на пиесата:");
-            Console.WriteLine("13 Намери пиесата по година:");
+            Console.WriteLine("5.Принтирай всички актьори");
+            Console.WriteLine("6.Принтитай всички театри:");
+            Console.WriteLine("7.Принтирай всички Представления:");
+            Console.WriteLine("8.Актуализирай името на пиесата:");
         }
 
-        public void AddTheater()
+        static void AddTheater()
         {
             Console.WriteLine("Ваведете име на татъра:");
             string name = Console.ReadLine();
@@ -47,7 +79,7 @@ namespace Proekt2._0
             theatersL.Add(theaters);
         }
 
-        public void AddActor()
+        static void AddActor()
         {
             Console.WriteLine("Ваведете първо име на актьора:");
             string firstName = Console.ReadLine();
@@ -59,7 +91,7 @@ namespace Proekt2._0
             actorsL.Add(actors);
         }
 
-        public void AddPlay()
+        static void AddPlay()
         {
             Console.WriteLine("Ваведете заглавие на пиесата:");
             string title = Console.ReadLine();
@@ -69,7 +101,7 @@ namespace Proekt2._0
             playesL.Add(playes);
         }
 
-        public void AddProprietary()
+        static void AddProprietary()
         {
             Console.WriteLine("Ваведете необходими дрехи:");
             string clought = Console.ReadLine();
@@ -107,6 +139,22 @@ namespace Proekt2._0
             }
         }
 
-        
+        static void UpdatePlayTitle()
+        {
+            Console.Write("Въведете старото име на пиесата: ");
+            string oldTitle = Console.ReadLine();
+            Playes play = playesL.Find(p => p.Title == oldTitle);
+
+            if (play != null)
+            {
+                Console.Write("Въведете новото име: ");
+                play.Title = Console.ReadLine();
+                Console.WriteLine("Заглавието е актуализирано!");
+            }
+            else
+            {
+                Console.WriteLine("Пиесата не е намерена!");
+            }
+        }
     }
 }
